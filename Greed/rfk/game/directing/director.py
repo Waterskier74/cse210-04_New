@@ -7,7 +7,7 @@ class Director:
         _keyboard_service (KeyboardService): For getting directional input.
         _video_service (VideoService): For providing video output.
     """
-    def __init__(self, keyboard_service, video_service, artifact_service):
+    def __init__(self, keyboard_service, video_service):
         """Constructs a new Director using the specified keyboard and video services.
         
         Args:
@@ -16,8 +16,6 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
-        self._artifact_service = artifact_service
-
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -39,13 +37,9 @@ class Director:
             cast (Cast): The cast of actors.
         """
         robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
         velocity = self._keyboard_service.get_direction()
 
         robot.set_velocity(velocity)
-        for artifact in artifacts:
-            artifact_velocity = self._artifact_service.get_direction()
-            artifact.set_velocity(artifact_velocity)
 
 
     def _do_updates(self, cast):
@@ -66,7 +60,7 @@ class Director:
             artifact.move_next(max_x, max_y)
             if robot.get_position().equals(artifact.get_position()):
                 message = ("")
-                message = artifact.get_message()
+                message = artifact.get_score()
                 banner.set_text(message)    
         
     def _do_outputs(self, cast):
@@ -79,3 +73,4 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+        
