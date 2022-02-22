@@ -41,7 +41,7 @@ def main():
     
     # create the robot
     x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
+    y = int(MAX_Y -30)
     position = Point(x, y)
 
     robot = Actor()
@@ -51,15 +51,13 @@ def main():
     robot.set_position(position)
     cast.add_actor("robots", robot)
     
-
+    # create the default field of artifacts
     for n in range(DEFAULT_ARTIFACTS):
         decision = random.randint(1,2)
         if decision == 1:
             text = "*"
         else:
             text = "O"
-
-            
 
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
