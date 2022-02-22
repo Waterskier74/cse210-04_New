@@ -61,13 +61,14 @@ class Director:
         for artifact in artifacts:
             artifact.move_next(max_x, max_y)
             if robot.get_position().equals(artifact.get_position()):
+                cast.remove_actor("artifacts", artifact)
                 rock_or_gem = artifact.get_text()
                 if rock_or_gem == "*":
                     self._score += 1
                 elif rock_or_gem == "O":
                     self._score -= 1
             banner.set_text(f'Score: {self._score}')
-                    
+            
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
         
