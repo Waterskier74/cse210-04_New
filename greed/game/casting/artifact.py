@@ -12,21 +12,21 @@ class Artifact(Actor):
     """
     def __init__(self):
         super().__init__()
-        self.score = "0"
-        #self._message = ""
+        self._score = 0
         
     def get_score(self):
-        """Gets the gem's points.
+        """Gets the gem's score.
         
         Returns:
-            int: Point value.
+            int: score value.
         """
         return self._score
     
     def set_score(self, score):
-        """Updates the message to the given one.
+        """Updates the score to the given one.
         
         Args:
-            message (string): The given message.
+            score (int): The given score.
         """
         self._score = score
+
